@@ -19,25 +19,25 @@ return;
 
 
 while(gameRunning){
-//Creates a random number that is used to place the X in the gameboard array
-let i = Math.floor(Math.random() * 10);
-    if(takenNumbers.length === 10){
-        gameRunning = false;;
-        console.log("Game done");
-        return;
-    } else if (takenNumbers.includes(i) == false){
-        if(xTurns.includes(turn) == true){
-            takenNumbers.push(i);
-            gameBoard[i] = "X";
-            gameBoardDisplay();
-            console.log(takenNumbers);
-            turn++;
-        }else{
-            takenNumbers.push(i);
-            gameBoard[i] = "O";
-            gameBoardDisplay();
-            console.log(takenNumbers);
-            turn++;
+    //Creates a random number that is used to place the X in the gameboard array
+    let i = Math.floor(Math.random() * 10);
+        if(takenNumbers.length === 10){
+            gameRunning = false;;
+            console.log("Game done");
+            return;
+        } else if (takenNumbers.includes(i) == false){
+            if(xTurns.includes(turn) == true){
+                takenNumbers.push(i);
+                gameBoard[i] = "X";
+                gameBoardDisplay();
+                console.log(takenNumbers);
+                turn++;
+            }else{
+                takenNumbers.push(i);
+                gameBoard[i] = "O";
+                gameBoardDisplay();
+                console.log(takenNumbers);
+                turn++;
+            };
         };
     };
-};
