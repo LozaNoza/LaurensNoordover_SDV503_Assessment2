@@ -1,7 +1,6 @@
 //Variables used for player turns and storing numbers 
 let currentPlayer;
 let turn = 1;
-const xTurns = [1, 3, 5, 7, 9];
 let gameRunning = true;
 let x;
 let playerWon = false;
@@ -10,14 +9,14 @@ let playerWon = false;
 const gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 //To see the generated x numbers
 const takenNumbers = [];
-const winConditions = [ [0, 1, 2],
-                        [3, 4, 5],
-                        [6, 7, 8],
-                        [0, 3, 6],
+const winConditions = [ [1, 2, 3],
+                        [4, 5, 6],
+                        [7, 8, 9],
                         [1, 4, 7],
                         [2, 5, 8],
-                        [0, 4, 8],
-                        [2, 4, 6]
+                        [3, 6, 9],
+                        [1, 5, 9],
+                        [3, 5, 7]
                       ];
 
 //Creates the gameboard using a template litiral. Calls the value which is stored in the gameboard array
@@ -36,9 +35,9 @@ while(gameRunning){
     let i = Math.floor(Math.random() * 10);
     for(let e = 0; i < winConditions.length; e++){
         const condition = winConditions[e];
-        const cellA = gameBoard[condition [0]];
-        const cellB = gameBoard[condition [1]];
-        const cellC = gameBoard[condition [2]];
+        const cellA = gameBoard[condition [1]];
+        const cellB = gameBoard[condition [2]];
+        const cellC = gameBoard[condition [3]];
         if(typeof cellA === 'number' ||  typeof cellB === 'number' ||  typeof cellC === 'number'){
             continue
         }
