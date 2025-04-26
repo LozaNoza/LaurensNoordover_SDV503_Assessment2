@@ -3,7 +3,11 @@ let currentPlayer;
 let turn = 1;
 let gameRunning = true;
 let x;
+const xTurns = [1, 3, 5, 7, 9];
 let playerWon = false;
+let e = 0;
+let winningPlayer;
+let winningRow;
 
 //Sets a constant array which will be used as the gameboard
 const gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -33,31 +37,35 @@ return;
 while(gameRunning){
     //Creates a random number that is used to place the X in the gameboard array
     let i = Math.floor(Math.random() * 10);
-    for(let e = 0; i < winConditions.length; e++){
-        const condition = winConditions[e];
-        const cellA = gameBoard[condition [1]];
-        const cellB = gameBoard[condition [2]];
-        const cellC = gameBoard[condition [3]];
-        if(typeof cellA === 'number' ||  typeof cellB === 'number' ||  typeof cellC === 'number'){
-            continue
-        }
+    for(let e = 0; e < winConditions.length; e++){
+        const cellA = gameBoard[winConditions[e][0]];
+        const cellB = gameBoard[winConditions[e][1]];
+        const cellC = gameBoard[winConditions[e][2]];
         if(cellA == cellB && cellB == cellC){
             playerWon = true;
+            winningPlayer = cellA;
+            winningRow = winConditions[e];
             continue
         }
-    }
+        else{
+            continue
+        }
+    };
     if(takenNumbers.length === 10 || playerWon == true){
-        gameRunning = false;;
+        gameRunning = false;
         if(takenNumbers.length === 10){
             console.log("Game over no moves left, no winners :(");
             gameBoardDisplay();
+            return;
         }
         if(playerWon == true){
-            console.log(`Player ${ "winner" } wins! :D`);
+            console.log(`Player ${ winningPlayer } wins with a row on ${winningRow}! :D`);
             gameBoardDisplay();
+            return;
         }
         else{
             console.log("Game error, please restart game");
+            return;
         }    
     }
     else if (takenNumbers.includes(i) == false){
@@ -71,6 +79,7 @@ while(gameRunning){
             console.log(`The updated game board is the following`);
             gameBoardDisplay();                
             turn++;
+            continue
         }else{
             currentPlayer = "O";
             console.log(`${ currentPlayer }'s turn. Please select an avalible number from the gameboard.`);
@@ -81,6 +90,7 @@ while(gameRunning){
             console.log(`The updated game board is the following`);
             gameBoardDisplay();
             turn++;
-            };
-        };
-    };
+            continue
+            }
+        }
+    }
