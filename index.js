@@ -1,3 +1,8 @@
+/*The program that has been written is a simple tic-tac-toe game
+When node . is typed in the terminal, a 3x3 game board is created, that fills X's and O's randomly until one of the letters is the first to create a horizontal, vertical or diagonal line of their letter.
+Once this has happened, the game will finish.
+If neither of the letters can create a line of their letter, and the game board is full, the game will be classified as a draw and will come to an end.*/
+
 //Variables used for player turns and storing numbers 
 let turn = 1;
 let gameRunning = true;
@@ -11,7 +16,7 @@ const gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 //To see the generated x numbers
 const takenNumbers = [];
 
-//Creates a 2D array which contains all of the indexs that if a line of X's or O's are aat, result in a game win
+//Creates a 2D array which contains all of the indexs that if a line of X's or O's are at, result in a game win
 const winConditions = [ [1, 2, 3],
                         [4, 5, 6],
                         [7, 8, 9],
@@ -41,6 +46,7 @@ function gameFunction(pickedNumber, currentPlayer){
     turn++;
 }
 
+//Messages that outlines the objective of the game and how it will play out
 console.log(`Welcome to this game of tic tac toe. The computer will alternate between playing for the X's and O's.
 			\nIt will select a random number that is avalible from the bellow game board and replace it with the current players letter.
 			\nThe same number is unable to be used more than once, so if X or O wants to insert a number into a square which has already been filled by one of them, they will need to select a new one.
@@ -53,16 +59,18 @@ while(gameRunning){
     //Creates a random number that is used to place the X in the gameboard array
     let pickedNumber = Math.floor((Math.random() * 9) + 1);
     //Checks to see if any of the win condtions set in the winCondition array are met. If they aren't the while loop will continue on from the else statement
-    for(let e = 0; e < winConditions.length; e++){
+    for(let e = 0; e < winConditions.length; e++ ){
         const cellA = gameBoard[winConditions[e][0]];
         const cellB = gameBoard[winConditions[e][1]];
         const cellC = gameBoard[winConditions[e][2]];
+		//If all the cells that are set aove match eachother, the game will prepair to conclude by setting playerWon to true, recording what letter has won and which paturn has caused the win.
         if(cellA == cellB && cellB == cellC){
             playerWon = true;
             winningPlayer = cellA;
             winningRow = winConditions[e];
-            continue
+            break
         }
+		//If the game has run through all the possable win condtions and has not been able to find one the program will contnue to the following code
         else{
             continue
         }
@@ -71,7 +79,7 @@ while(gameRunning){
     //Checks to see if the taken numbers variable is has 9 numbers meaning the game board is full, and also checks to see if there are any winning players found in the previous for loop.
     if(takenNumbers.length === 9 || playerWon == true){
         gameRunning = false;
-        //If the takenNumbers has 9 indexes filled it means that the game board is full. THe gameboard will be displayed one last time and the game will notify the player that there are no more moved left.
+        //If the takenNumbers has 9 indexes filled it means that the gameBoard is full. The gameboard will be displayed one last time and the game will notify the player that there are no more moved left.
         if(takenNumbers.length === 9){
             gameBoardDisplay();
             console.log(`\nGame over no moves left, no winners. This match is a draw.`);
@@ -105,5 +113,3 @@ while(gameRunning){
         }
     }
 }
-
-    //Code to check for even numbers https://www.w3schools.com/java/java_howto_even_or_odd.asp
